@@ -51,7 +51,7 @@
     ["No invented facts", "No made-up statistics, customer names, quotes or logos. Illustrative figures are labeled."],
     ["Confidential stays confidential", "Share only the customer, employee or deal details the task needs. Never paste passwords or credentials."],
     ["A person approves", "Drafts don’t commit the company to pricing, dates or terms. Review before anything goes out."],
-    ["Exact product names", "SmartCOMM™, SmartIQ™, SmartPATH™, SmartHUB™, SmartDX™, Conversation Cloud™. Never abbreviated."],
+    ["Exact product names", "SmartCOMM™, SmartIQ™, SmartPATH™, SmartHUB™, SmartDX™. Never abbreviated. Conversation Cloud is retired: say the Smart Communications platform."],
   ];
 
   function render() {

@@ -64,7 +64,8 @@ Section anchors in `index.html`: `#logo`, `#product-logos`, `#color`, `#typograp
 ## Brand rules for anything written on the site
 
 - Voice: approachable, clear and assured. Second person, active voice, American English, one idea per sentence, outcome before feature.
-- Exact product names, never abbreviated: Smart Communications™, SmartCOMM™, SmartIQ™, SmartPATH™, SmartHUB™, SmartDX™, Conversation Cloud™.
+- Exact product names, never abbreviated: Smart Communications™, SmartCOMM™, SmartIQ™, SmartPATH™, SmartHUB™, SmartDX™.
+- "Conversation Cloud" is retired (November 2026). Talk about the full platform (the Smart Communications platform) or name individual products.
 - Title case for headings. Button labels say exactly what they do ("Download RGB logo pack", "Download DM Sans"), not just "Download".
 - No invented statistics, customer names or quotes.
 - Typefaces: Proxima Nova for PDFs, print and video; Segoe UI for PowerPoint; Roboto for product, website, social and ads. The site itself uses Roboto and Proxima Nova.
@@ -95,8 +96,9 @@ Leave both alone until Studio Rendezvous confirms review is finished. Then, for 
 
 ## Still open (November 2026)
 
-- **25 "Link coming" buttons:** the `null` entries in `window.SC_LINKS` (image library and cut-out library, the five Innovate city photo sets, the Innovate 2027 PowerPoint template, the PowerPoint toolkit, event backdrops and retractable banners, giveaway templates, the SmartIQ Story video).
-- **Finished photo backgrounds** for the image packs and Innovate city downloads: still to come.
+- **25 "Link coming" buttons:** the `null` entries in `window.SC_LINKS` (image library and cut-out library, which are hidden for now, the five Innovate city photo sets, the Innovate 2027 PowerPoint template, the PowerPoint toolkit, event backdrops and retractable banners, giveaway templates, the SmartIQ Story video).
+- **Finished photo backgrounds** for the image packs and Innovate city downloads: still to come. The two image pack cards and the Text Overlay example were removed from Images in November 2026 (the raw stock and overlay example were misleading); bring the packs back once finished backgrounds exist. The Innovate city downloads stay, but should carry an overlay, the Innovate logo or the Innovate arrows.
+- **Prompt builder:** "Social post or display ad" writes text-only copy for now. Once the messaging framework is final, Brittany wants the prompts to tell Claude to read the brand guide and the messaging framework.
 - **Open BugHerd comments:** #111 SmartIQ Story link, #154 Innovate 2027 template, #159 PowerPoint toolkit, #58 footer contacts and Asana link, #59 case study / PathFactory / YouTube thumbnail guide, #49 industry icons (parked).
 - **WordPress:** Smart's developers asked for a WordPress wrapper so the guide can run at brand.smartcommunications.com on Kinsta. The likely approach is a small WordPress theme that serves `site/` unchanged at `/` and `/prompts/`, with asset paths pointing into the theme. Not built yet; waiting on the developers' answers (own look or inside the corporate header and footer, separate WordPress install or part of the main site, how they deploy to Kinsta).
 

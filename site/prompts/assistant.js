@@ -1,6 +1,6 @@
 /* Which AI assistant the reader uses, and how a prompt changes for it.
    Claude with the Smart Communications skills: prompts open with the line that loads the skills.
-   Any other assistant (Copilot, ChatGPT, Gemini…): that line becomes a short brand brief, and steps that only the
+   Microsoft Copilot (or ChatGPT, Gemini…): that line becomes a short brand brief, and steps that only the
    Claude skills can do (slide builder, copy checker, recipes) become plain instructions. */
 (function () {
   "use strict";
@@ -11,7 +11,8 @@
   const BRAND = [
     "Smart Communications task. Follow the Smart Communications brand:",
     "- Voice: approachable, clear and assured. Second person, active voice, American English, one idea per sentence, outcome before feature.",
-    "- Exact product names, ™ on first mention, never abbreviated: Smart Communications™, SmartCOMM™, SmartIQ™, SmartPATH™, SmartHUB™, SmartDX™, Conversation Cloud™.",
+    "- Exact product names, ™ on first mention, never abbreviated: Smart Communications™, SmartCOMM™, SmartIQ™, SmartPATH™, SmartHUB™, SmartDX™.",
+    "- Don't use \"Conversation Cloud\": it is retired. Say the Smart Communications platform, or name the product.",
     "- No invented statistics, customer names, quotes or logos. Mark missing proof as [NEEDS PROOF].",
     "- If you design anything: Industry Blue Darker #03102C and Dodger Blue #0094FF, Roboto for web, Segoe UI for PowerPoint and Word.",
   ].join("\n");

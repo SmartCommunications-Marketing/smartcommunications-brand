@@ -6,7 +6,7 @@
   const $ = (s, r = document) => r.querySelector(s);
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-  const PRODUCTS = ["Smart Communications platform", "SmartCOMM™", "SmartIQ™", "SmartPATH™", "SmartHUB™", "SmartDX™", "Conversation Cloud™"];
+  const PRODUCTS = ["Smart Communications platform", "SmartCOMM™", "SmartIQ™", "SmartPATH™", "SmartHUB™", "SmartDX™"];
   const INDUSTRIES = ["P&C insurance", "Life insurance", "Health insurance", "Banking and financial services", "Healthcare",
     "Government and public sector", "Trade and logistics"];
   const AUDIENCES = ["Business decision-makers (C-suite, VP)", "IT and technical buyers", "Operations leaders", "Customer experience leaders",
@@ -28,17 +28,21 @@
   };
 
   const TYPES = [
-    { id: "social", name: "Social post", skills: ["brand", "social", "copy"], fields: [
-      ["postType", "Post type", "select", ["Announcement or news", "Event or webinar promotion", "Report or content launch", "Thought leadership", "Customer story", "Hiring", "Award or recognition"]],
-      ["format", "Format", "select", ["Square tile (1080 × 1080)", "Landscape tile (1200 × 627)", "Carousel (4–8 square frames)", "Text-only post"]],
+    // text-only for now (#168, #176): no image tiles until the finished backgrounds arrive
+    { id: "social", name: "Social post or display ad", skills: ["copy"], fields: [
+      ["channel", "Channel", "select", ["LinkedIn post", "Facebook, Instagram or X post", "LinkedIn ad", "Display ad (e.g. 6Sense, Google)"]],
+      ["postType", "Purpose", "select", ["Announcement or news", "Event or webinar promotion", "Report or content launch", "Thought leadership", "Customer story", "Hiring", "Award or recognition"]],
       F.topic, F.audience, F.product, F.goal, ["url", "Link", "text", "https://"], F.proof],
-      build: (v, c) => [
-        `Create ${art(v.postType)} LinkedIn post about ${v.topic}. Format: ${v.format}.`,
+      build: (v) => [
+        `Write social or ad copy about ${v.topic}. Channel: ${v.channel}. Purpose: ${v.postType}.`,
         `Audience: ${v.audience}. Product: ${v.product}.`,
-        `On-image copy: no more than 40 words, one call to action: ${v.goal} (${v.url}).`,
-        `Also write the caption: a hook line, 1–3 sentences, the link and 0–3 hashtags.`,
+        "Text only: no image or graphic.",
+        /display ad/i.test(v.channel)
+          ? `Give me 3 variations, each with a headline (30 characters or fewer), a description (90 characters or fewer) and a button label. Call to action: ${v.goal}. Link: ${v.url}.`
+          : /linkedin ad/i.test(v.channel)
+            ? `Give me 3 variations, each with intro text (150 characters or fewer), a headline (70 characters or fewer) and a button label. Call to action: ${v.goal}. Link: ${v.url}.`
+            : `Give me 2 versions of the post, each with a hook line, 1–3 short sentences, one call to action (${v.goal}), the link (${v.url}) and 0–3 hashtags.`,
         v.proof !== "[PROOF POINTS]" ? `Use only these proof points: ${v.proof}` : "",
-        c ? "Show me the frame outline and spec first (recipe, surface, hex, type, logo, icons), then build the PNG." : "Show me the layout and on-image copy first, then the caption.",
       ] },
     { id: "brief", name: "Solution brief", skills: ["brand", "digital-pdf", "copy"], fields: [
       ["useCase", "Use case", "text", "e.g. claims correspondence, policy onboarding"],
@@ -165,7 +169,7 @@
 
   const state = { type: TYPES[0].id, values: {} };
 
-  const KEEP_CASE = new Set(["product", "region", "role"]);
+  const KEEP_CASE = new Set(["product", "region", "role", "channel"]);
   // dropdown choices sit mid-sentence: lowercase the first letter unless it starts an acronym or a name
   const lc = (s) => (/^[A-Z][a-z]/.test(s) ? s[0].toLowerCase() + s.slice(1) : s);
   const art = (s) => (/^[aeiou]/i.test(s) ? "an " : "a ") + s;

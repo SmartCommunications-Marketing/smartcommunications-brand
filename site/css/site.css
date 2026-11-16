@@ -829,8 +829,8 @@ main { display: block; }
 .icon-board.is-dark .icon-empty { color: #fff; }
 
 /* Images */
-.img-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px 24px; align-items: stretch; }
-.img-grid img { display: block; width: 100%; height: 100%; min-height: 150px; object-fit: cover; border-radius: var(--radius-tile); }   /* rows grow to the download cards' height */
+.img-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 24px; }   /* image pack cards removed for now (#172, #173) */
+.img-grid img { display: block; width: 100%; height: auto; aspect-ratio: 572 / 304; object-fit: cover; border-radius: var(--radius-tile); }
 /* cutouts carry their own 1 px frame in the file, so no CSS border (it doubled up, #146) */
 .img-pack { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 14px 16px; background: #fff; border: 1px solid var(--line-accent); border-radius: var(--radius-tile); }
 .img-pack h4 { color: var(--text-strong); font: 700 15px/20px var(--font-head); }

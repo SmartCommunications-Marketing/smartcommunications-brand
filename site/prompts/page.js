@@ -21,7 +21,7 @@
 
   const NOTES = {
     claude: "Prompts start with a line that loads the Smart Communications brand skills, so Claude can build decks, PDFs and social tiles on brand.",
-    other: "Prompts start with a short brand brief instead (voice, product names, colors and fonts), so Copilot, ChatGPT, Gemini or any other assistant writes on brand.",
+    other: "Prompts start with a short brand brief instead (voice, product names, colors and fonts), so Copilot writes on brand. They work the same way in ChatGPT or Gemini.",
   };
   function sync() {
     document.querySelectorAll("#pl-assistant button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.ai === AI.mode)));

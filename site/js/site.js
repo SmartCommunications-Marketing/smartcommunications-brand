@@ -380,7 +380,7 @@
       })),
       { re: /\bSmart\s?Comms?\b(?!unication)/g, test: () => true, fix: "SmartCOMM (product) or Smart Communications (company)" },
       { re: /\b(SIQ|SCOMM|SPATH|SHUB|SDX)\b/g, test: () => true, fix: "the full product name — never abbreviate" },
-      { re: /\bConversation\s*cloud\b/gi, test: (m) => m !== "Conversation Cloud", fix: "Conversation Cloud" },
+      { re: /\bConversation\s*cloud\b/gi, test: () => true, fix: "the Smart Communications platform, or the product name (Conversation Cloud is retired)" },
       { re: /\bSmart Communication\b(?!s)/g, test: () => true, fix: "Smart Communications" },
       { re: /\bSmartCommunications\b/g, test: () => true, fix: "Smart Communications (two words)" },
       { re: /\b(colour|centre|organis(e|ed|ing|ation)|personalis(e|ed|ation)|optimis(e|ed|ation)|customis(e|ed|ation))\b/gi, test: () => true, fix: "American spelling (color, center, organize, personalize)" }
