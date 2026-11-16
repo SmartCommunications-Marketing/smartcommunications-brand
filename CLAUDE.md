@@ -59,6 +59,7 @@ Section anchors in `index.html`: `#logo`, `#product-logos`, `#color`, `#typograp
 - **CMYK logo files** are EPS only (SVG and PNG can't hold CMYK). They were made in Adobe Illustrator.
 - **Prompt library:** `prompts-data.js` was generated from Brittany's prompt library. Its header says not to edit by hand; that no longer applies after handover, so edit it directly, keeping the same structure (`sections`, `prompts`, `quick`, `chains`). Each prompt has `id`, `section`, `title`, `type`, `skills`, `text`, `add`.
 - **Large files:** GitHub refuses files over 100 MB, and warns above 50 MB. The master deck is about 30 MB. Link to SharePoint for anything bigger.
+- **Proxima Nova (Adobe Fonts):** loads from Smart's own Adobe Fonts web project, `https://use.typekit.net/wde7hle.css` (Regular and Bold, with italics), linked in the `<head>` of both HTML pages. The web project only serves the font to the website addresses listed in it, so when the site moves to brand.smartcommunications.com, add that address to the web project in Adobe Fonts.
 
 ## Brand rules for anything written on the site
 
@@ -94,7 +95,6 @@ Leave both alone until Studio Rendezvous confirms review is finished. Then, for 
 
 ## Still open (November 2026)
 
-- **Adobe Fonts:** Proxima Nova loads from `https://use.typekit.net/heb7mxc.css`, a web project on Studio Rendezvous's Adobe account that ends at handover. Smart needs its own Adobe Fonts web project with Proxima Nova Regular and Bold; then replace that link in both HTML pages.
 - **25 "Link coming" buttons:** the `null` entries in `window.SC_LINKS` (image library and cut-out library, the five Innovate city photo sets, the Innovate 2027 PowerPoint template, the PowerPoint toolkit, event backdrops and retractable banners, giveaway templates, the SmartIQ Story video).
 - **Finished photo backgrounds** for the image packs and Innovate city downloads: still to come.
 - **Open BugHerd comments:** #111 SmartIQ Story link, #154 Innovate 2027 template, #159 PowerPoint toolkit, #58 footer contacts and Asana link, #59 case study / PathFactory / YouTube thumbnail guide, #49 industry icons (parked).
