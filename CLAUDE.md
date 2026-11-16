@@ -1,0 +1,106 @@
+# SMART Brand Guide website: notes for Claude
+
+This file tells Claude how the Smart Communications brand guide website works and how to change it safely. Keep it at the root of the repository, so Claude Code reads it at the start of every session. Update it when something here stops being true.
+
+## The project in one paragraph
+
+A one-page brand guide for Smart Communications (logo, color, type, icons, images, voice, events, sub-brands, templates, guides) plus a Starter Prompts page. It is plain HTML, CSS and JavaScript: no build step, no framework, no dependencies, no database. Everything that goes live is in `site/`. Designed and built by Studio Rendezvous in 2026; owned and edited by Smart Communications marketing (Alistair) from November 2026.
+
+- **Repository:** https://github.com/SmartCommunications-Marketing/smartcommunications-brand (public)
+- **Live site:** https://smartcommunications-marketing.github.io/smartcommunications-brand/
+- **Starter Prompts page:** the same address plus `prompts/`
+- **Final home (planned):** brand.smartcommunications.com, hosted on Smart's WordPress / Kinsta setup. Not set up yet; see "Still open" below.
+
+## How a change goes live
+
+1. `git pull` first. Studio Rendezvous may also push fixes, so start from the latest copy.
+2. Edit the files.
+3. Preview locally: `python3 tools/serve.py`, then open http://localhost:4180 (the Starter Prompts page is at http://localhost:4180/prompts/). The preview server turns caching off, so a reload shows the edit.
+4. Check the change in the browser, at desktop width and at phone width (about 375 px).
+5. Raise the version tag if you changed a stylesheet or script (see the next section).
+6. Commit with a plain-English message, then push to `main`. The workflow `.github/workflows/pages.yml` publishes `site/` to the live site in about a minute. Watch it with `gh run watch` or in the repository's Actions tab.
+
+**Pushing to `main` publishes to the live site.** Always show the person the change in the local preview and get a clear yes before pushing.
+
+## The one rule: version tags
+
+Stylesheets and scripts are loaded with a version tag, for example `css/site.css?v=20261111c`. Browsers and GitHub Pages cache files for up to 10 minutes, so after changing any `.css` or `.js` file, raise its tag. Otherwise visitors keep seeing the old file.
+
+- Use the date plus a letter: `?v=20261120a`, then `?v=20261120b` for a second change the same day.
+- `site/index.html` loads `css/tokens.css`, `css/site.css`, `js/data.js`, `js/site.js`. Raise all four together to keep it simple.
+- `site/prompts/index.html` loads `../css/tokens.css`, `../css/site.css`, `prompts.css` and five scripts. Raise those together too.
+- Icons have their own tag: `const V = "?v=…"` in `site/js/site.js`. Raise it when icon artwork changes.
+- Changes to `index.html` itself need no tag.
+
+## Where things are
+
+| To change | Edit |
+|---|---|
+| Wording, sections, cards, buttons | `site/index.html` |
+| A button that says "Link coming" | `window.SC_LINKS` at the top of `site/js/data.js`: paste the URL in place of `null`. The button switches on by itself. |
+| Brand colors, spacing, type sizes | `site/css/tokens.css` (and the swatch data `window.SC_COLORS` in `site/js/data.js`) |
+| CMYK values shown on swatches | `window.SC_PRINT` in `site/js/data.js` |
+| Component styles | `site/css/site.css` |
+| Icon names and search words | `window.SC_ICONS` in `site/js/data.js` |
+| Sub-brand palettes (Innovate, Accordant, Scale) | `window.SC_SUBBRANDS` in `site/js/data.js` |
+| Behavior: sections, copy-to-clipboard, icon browser, swatches | `site/js/site.js` |
+| Logos, icons, photos, downloads | Files in `site/assets/`. Replace a file with one of the same name, so links keep working. |
+| Starter prompt library | `site/prompts/prompts-data.js` (`window.SC_PROMPTS`) |
+| Prompt builder forms (12 types) | `site/prompts/builder.js` |
+| How prompts adapt to Claude vs. other AI assistants | `site/prompts/assistant.js` |
+| Local preview server | `tools/serve.py` |
+
+Section anchors in `index.html`: `#logo`, `#product-logos`, `#color`, `#typography`, `#iconography`, `#images`, `#voice`, `#events`, `#sub-brands`, `#templates`, `#prompts`, `#guides`. Each brand section is a `.section__card` with a matching `…-panel` body.
+
+### Notes on specific areas
+
+- **Asset folders:** `logos/` (SVG), `png-logos/` (2000 px PNG), `print-logos/` (EPS, CMYK and RGB), `icons/{dark,light,dark-2color,light-2color}/`, `subbrands/`, `innovate27/`, `events/`, `templates/`, `images/`, `clearspace/`, `guides/`, `downloads/` (zips, decks, Excel templates, swatches, tokens).
+- **Logos and icon packs:** the zips in `site/assets/downloads/` were built from the files in the asset folders. If a logo or icon changes, rebuild the matching zip too, keeping the same folder layout inside it, or the download will be out of date.
+- **CMYK logo files** are EPS only (SVG and PNG can't hold CMYK). They were made in Adobe Illustrator.
+- **Prompt library:** `prompts-data.js` was generated from Brittany's prompt library. Its header says not to edit by hand; that no longer applies after handover, so edit it directly, keeping the same structure (`sections`, `prompts`, `quick`, `chains`). Each prompt has `id`, `section`, `title`, `type`, `skills`, `text`, `add`.
+- **Large files:** GitHub refuses files over 100 MB, and warns above 50 MB. The master deck is about 30 MB. Link to SharePoint for anything bigger.
+
+## Brand rules for anything written on the site
+
+- Voice: approachable, clear and assured. Second person, active voice, American English, one idea per sentence, outcome before feature.
+- Exact product names, never abbreviated: Smart Communications™, SmartCOMM™, SmartIQ™, SmartPATH™, SmartHUB™, SmartDX™, Conversation Cloud™.
+- Title case for headings. Button labels say exactly what they do ("Download RGB logo pack", "Download DM Sans"), not just "Download".
+- No invented statistics, customer names or quotes.
+- Typefaces: Proxima Nova for PDFs, print and video; Segoe UI for PowerPoint; Roboto for product, website, social and ads. The site itself uses Roboto and Proxima Nova.
+- Use colors from `tokens.css`; don't introduce new hex values.
+
+## Things not to do
+
+- **Don't remove the `noindex` tags** (`<meta name="robots" content="noindex, nofollow">` in both HTML pages). Smart decided the guide is public but stays out of search engines. Don't add a `robots.txt` that blocks the site either: search engines must be able to read the pages to see the tag.
+- **Don't commit font files** (Proxima Nova, Segoe UI). Segoe UI is Microsoft's and can't be redistributed; Proxima Nova loads from Adobe Fonts. The type images on the site are PNG pictures, not fonts.
+- **Don't commit full-size licensed stock photos.** Photo downloads will be finished backgrounds (cropped, with brand overlays), not raw stock.
+- **Don't commit passwords, API keys or hosting credentials.** The repository is public.
+- **Don't push without the person's go-ahead.**
+
+## Review mode (on until client review closes)
+
+The site is still set up for the BugHerd review that Studio Rendezvous runs:
+
+- `const REVIEW_PERIOD = true;` in `site/js/site.js` keeps every section open for every visitor, so BugHerd comment pins land on the right elements.
+- Both HTML pages have a small script in `<head>` that loads BugHerd (`sidebarv2.js`).
+
+Leave both alone until Studio Rendezvous confirms review is finished. Then, for launch:
+
+1. Set `REVIEW_PERIOD` to `false` (sections collapse again, with Expand all / Collapse all).
+2. Remove the BugHerd `<script>` block from `site/index.html` and `site/prompts/index.html`.
+3. Point `og:url` and `og:image` in `site/index.html` at the final address (brand.smartcommunications.com).
+4. Keep the `noindex` tags.
+5. Raise the version tags.
+
+## Still open (November 2026)
+
+- **Adobe Fonts:** Proxima Nova loads from `https://use.typekit.net/heb7mxc.css`, a web project on Studio Rendezvous's Adobe account that ends at handover. Smart needs its own Adobe Fonts web project with Proxima Nova Regular and Bold; then replace that link in both HTML pages.
+- **25 "Link coming" buttons:** the `null` entries in `window.SC_LINKS` (image library and cut-out library, the five Innovate city photo sets, the Innovate 2027 PowerPoint template, the PowerPoint toolkit, event backdrops and retractable banners, giveaway templates, the SmartIQ Story video).
+- **Finished photo backgrounds** for the image packs and Innovate city downloads: still to come.
+- **Open BugHerd comments:** #111 SmartIQ Story link, #154 Innovate 2027 template, #159 PowerPoint toolkit, #58 footer contacts and Asana link, #59 case study / PathFactory / YouTube thumbnail guide, #49 industry icons (parked).
+- **WordPress:** Smart's developers asked for a WordPress wrapper so the guide can run at brand.smartcommunications.com on Kinsta. The likely approach is a small WordPress theme that serves `site/` unchanged at `/` and `/prompts/`, with asset paths pointing into the theme. Not built yet; waiting on the developers' answers (own look or inside the corporate header and footer, separate WordPress install or part of the main site, how they deploy to Kinsta).
+
+## Contacts
+
+- Smart Communications: Alistair (brand, owner of the repository), Brittany (prompts, brand), Brandyn (video and The Brief links).
+- Studio Rendezvous: designed and built the site; holds the scripts that generated the icon sets, CMYK/RGB logo files, Innovate photos and the prompt library, available on request.
