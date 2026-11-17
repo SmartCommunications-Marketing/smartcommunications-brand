@@ -54,8 +54,8 @@
      the pin lands on the section header instead. So while BugHerd is on the page (a reviewer's extension, or the
      ?review=1 snippet) every section opens and stays open. It lasts for the browser tab; ?review=0 ends it.
      REVIEW_PERIOD keeps everything open for every visitor while client review runs: reviewers reach the guide from
-     BugHerd's dashboard and plain links too, without ?review=1. Set it to false at go-live to bring back collapsing. */
-  const REVIEW_PERIOD = true;
+     BugHerd's dashboard and plain links too, without ?review=1. Off since November 2026: sections collapse again. */
+  const REVIEW_PERIOD = false;
   function startReview() {
     if (reviewing) return;
     reviewing = true;

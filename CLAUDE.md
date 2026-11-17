@@ -79,20 +79,21 @@ Section anchors in `index.html`: `#logo`, `#product-logos`, `#color`, `#typograp
 - **Don't commit passwords, API keys or hosting credentials.** The repository is public.
 - **Don't push without the person's go-ahead.**
 
-## Review mode (on until client review closes)
+## Review mode (closing out)
 
-The site is still set up for the BugHerd review that Studio Rendezvous runs:
+Collapsing sections came back in November 2026: `const REVIEW_PERIOD = false;` in `site/js/site.js`. Sections start closed, with Expand all / Collapse all, and a nav link or `#anchor` opens its own section.
 
-- `const REVIEW_PERIOD = true;` in `site/js/site.js` keeps every section open for every visitor, so BugHerd comment pins land on the right elements.
-- Both HTML pages have a small script in `<head>` that loads BugHerd (`sidebarv2.js`).
+The BugHerd review that Studio Rendezvous runs is still open for the last few comments:
 
-Leave both alone until Studio Rendezvous confirms review is finished. Then, for launch:
+- Both HTML pages have a small script in `<head>` that loads BugHerd (`sidebarv2.js`), but only from the review link (`?review=1`). Ordinary visitors never load it.
+- On the review link every section opens and stays open, so BugHerd comment pins land on the right elements. `?review=0` turns it off for that browser tab.
 
-1. Set `REVIEW_PERIOD` to `false` (sections collapse again, with Expand all / Collapse all).
-2. Remove the BugHerd `<script>` block from `site/index.html` and `site/prompts/index.html`.
-3. Point `og:url` and `og:image` in `site/index.html` at the final address (brand.smartcommunications.com).
-4. Keep the `noindex` tags.
-5. Raise the version tags.
+Leave the BugHerd script alone until Studio Rendezvous confirms review is finished. Then, for launch:
+
+1. Remove the BugHerd `<script>` block from `site/index.html` and `site/prompts/index.html`.
+2. Point `og:url` and `og:image` in `site/index.html` at the final address (brand.smartcommunications.com).
+3. Keep the `noindex` tags.
+4. Raise the version tags.
 
 ## Still open (November 2026)
 
