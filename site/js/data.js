@@ -6,11 +6,6 @@
    null = the button renders as "Link coming". */
 window.SC_LINKS = {
   imageLibrary: null,
-  photosLondon: null,
-  photosSanDiego: null,
-  photosSydney: null,
-  photosSingapore: null,
-  photosCanberra: null,
   innovatePpt: null,
   pptToolkit: null,
   backdrop8x10Screen: null,
