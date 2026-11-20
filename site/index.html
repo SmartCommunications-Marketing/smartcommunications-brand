@@ -22,8 +22,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=DM+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://use.typekit.net/wde7hle.css">
-  <link rel="stylesheet" href="css/tokens.css?v=20261120a">
-  <link rel="stylesheet" href="css/site.css?v=20261120a">
+  <link rel="stylesheet" href="css/tokens.css?v=20261120b">
+  <link rel="stylesheet" href="css/site.css?v=20261120b">
 <script>
   /* BugHerd feedback sidebar, for client review rounds only. It loads from the review link (?review=1) and stays on
      for that browser tab; ?review=0 turns it off. The public guide never loads it. */
@@ -1127,7 +1127,7 @@
 </div>
 
 <!-- ======================================================================= TEMPLATES -->
-<div class="band band--white" id="templates">
+<div class="band" id="templates">
   <section class="section" aria-labelledby="templates-title">
     <div class="section__card" id="templates-all">
       <h2 class="section__head">
@@ -1138,12 +1138,12 @@
         </button>
       </h2>
       <div class="section__body" id="templates-all-panel" hidden="until-found">
-        <p class="lede">Approved templates for presentations, documents and data, plus social, display ad and video assets. Open Social and Display Ads or Video to see those files.</p>
+        <p class="lede">Approved templates for presentations, letters, data, social and display ads, and video. Open a template type to see its files.</p>
         <div class="subpanels">
           <div class="subpanel" id="templates-ppt">
-            <h3><button type="button" class="subpanel__toggle" data-toggle="sub" aria-expanded="true" aria-controls="tpl-ppt-panel">Master PowerPoint Deck <span class="dot" aria-hidden="true">
+            <h3><button type="button" class="subpanel__toggle" data-toggle="sub" aria-expanded="false" aria-controls="tpl-ppt-panel">Master PowerPoint Deck <span class="dot" aria-hidden="true">
               <svg viewBox="0 0 20 20"><path d="M7 4l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button></h3>
-            <div class="subpanel__body" id="tpl-ppt-panel">
+            <div class="subpanel__body" id="tpl-ppt-panel" hidden="until-found">
           <p class="sub-lede">The approved template for all SMART presentations — title, section, content and data layouts, all on-brand.</p>
           <div class="ppt-row">
             <div class="card card--soft resource"><h3>Master PPT deck</h3><p>Always start from the master template rather than reformatting previous decks.</p><a class="btn" href="assets/downloads/SmartCommunications_Corporate_Template_2026.pptx" download>Download master deck (.pptx, 30 MB)</a></div>
@@ -1153,9 +1153,9 @@
             </div>
           </div>
           <div class="subpanel" id="templates-excel">
-            <h3><button type="button" class="subpanel__toggle" data-toggle="sub" aria-expanded="true" aria-controls="tpl-excel-panel">Excel Templates <span class="dot" aria-hidden="true">
+            <h3><button type="button" class="subpanel__toggle" data-toggle="sub" aria-expanded="false" aria-controls="tpl-excel-panel">Excel Templates <span class="dot" aria-hidden="true">
               <svg viewBox="0 0 20 20"><path d="M7 4l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button></h3>
-            <div class="subpanel__body" id="tpl-excel-panel">
+            <div class="subpanel__body" id="tpl-excel-panel" hidden="until-found">
           <h4 class="xl-subhead">Chart templates</h4>
           <p class="sub-lede">Branded Excel charts, ready to fill in. Each tab pairs an editable data table with a finished chart in Segoe UI and the brand chart colors. Replace the sample data and copy the chart into PowerPoint or Word.</p>
           <div class="grid grid--2 xl-tpl">
@@ -1208,9 +1208,9 @@
             </div>
           </div>
           <div class="subpanel" id="templates-word">
-            <h3><button type="button" class="subpanel__toggle" data-toggle="sub" aria-expanded="true" aria-controls="tpl-word-panel">Word Letterhead <span class="dot" aria-hidden="true">
+            <h3><button type="button" class="subpanel__toggle" data-toggle="sub" aria-expanded="false" aria-controls="tpl-word-panel">Word Letterhead <span class="dot" aria-hidden="true">
               <svg viewBox="0 0 20 20"><path d="M7 4l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button></h3>
-            <div class="subpanel__body" id="tpl-word-panel">
+            <div class="subpanel__body" id="tpl-word-panel" hidden="until-found">
           <p class="sub-lede">The Smart Communications letterhead for business letters in Word. Replace the placeholder text with your own, and update the address block for your office.</p>
           <div class="grid grid--2 xl-tpl">
             <img src="assets/images/word-template-preview.jpg?v=20261120a" alt="Two pages of the Word letterhead: the SMART logo and office address above a blue rule, a dated letter, and a second page with the logo, signature block and page number, both with a navy-to-blue bar along the bottom." width="1580" height="1025" loading="lazy">
@@ -1466,7 +1466,7 @@
   </div>
 </dialog>
 
-<script src="js/data.js?v=20261120a"></script>
-<script src="js/site.js?v=20261120a"></script>
+<script src="js/data.js?v=20261120b"></script>
+<script src="js/site.js?v=20261120b"></script>
 </body>
 </html>

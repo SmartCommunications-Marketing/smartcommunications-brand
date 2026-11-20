@@ -155,7 +155,6 @@ a:hover { color: var(--sc-dodger); }
 /* ---- Guide sections (accordion) -------------------------------------------- */
 main { display: block; }
 .band { background: var(--surface-section); }
-.band--white { background: #fff; }
 .band--first { padding-top: 40px; }
 .band:last-of-type { padding-bottom: 40px; }
 
@@ -164,15 +163,12 @@ main { display: block; }
   margin: 0 auto;
   padding: 10px calc(var(--gutter) - 30px);
 }
-.band--white .section { padding-top: 0; padding-bottom: 0; }
 
 .section__card {
   border: 1px solid var(--line-accent);
   border-radius: var(--radius-section);
   background: transparent;
 }
-.band--white .section__card { border-color: transparent; border-bottom-color: var(--line-card); border-radius: 0; }
-.band--white .section:last-child .section__card { border-bottom-color: transparent; }
 
 .section__head { margin: 0; }
 .section__toggle {
