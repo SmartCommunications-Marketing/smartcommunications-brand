@@ -45,8 +45,8 @@ Stylesheets and scripts are loaded with a version tag, for example `css/site.css
 | Sub-brand palettes (Innovate, Accordant, Scale) | `window.SC_SUBBRANDS` in `site/js/data.js` |
 | Behavior: sections, copy-to-clipboard, icon browser, swatches | `site/js/site.js` |
 | Logos, icons, photos, downloads | Files in `site/assets/`. Replace a file with one of the same name, so links keep working. |
-| Starter prompt library | `site/prompts/prompts-data.js` (`window.SC_PROMPTS`) |
-| Prompt builder forms (12 types) | `site/prompts/builder.js` |
+| Prompt builder forms (13 types) | `site/prompts/builder.js` |
+| Brand updates the prompt builder passes to AI agents | `site/prompts/brand-updates.js` (`window.SC_BRAND_UPDATES`): add new entries at the top |
 | How prompts adapt to Claude vs. other AI assistants | `site/prompts/assistant.js` |
 | Local preview server | `tools/serve.py` |
 
@@ -57,7 +57,10 @@ Section anchors in `index.html`: `#logo`, `#product-logos`, `#color`, `#typograp
 - **Asset folders:** `logos/` (SVG), `png-logos/` (2000 px PNG), `print-logos/` (EPS, CMYK and RGB), `icons/{dark,light,dark-2color,light-2color}/`, `subbrands/`, `innovate27/`, `events/`, `templates/`, `images/`, `clearspace/`, `guides/`, `downloads/` (zips, decks, Excel templates, swatches, tokens).
 - **Logos and icon packs:** the zips in `site/assets/downloads/` were built from the files in the asset folders. If a logo or icon changes, rebuild the matching zip too, keeping the same folder layout inside it, or the download will be out of date.
 - **CMYK logo files** are EPS only (SVG and PNG can't hold CMYK). They were made in Adobe Illustrator.
-- **Prompt library:** `prompts-data.js` was generated from Brittany's prompt library. Its header says not to edit by hand; that no longer applies after handover, so edit it directly, keeping the same structure (`sections`, `prompts`, `quick`, `chains`). Each prompt has `id`, `section`, `title`, `type`, `skills`, `text`, `add`.
+- **Prompt library:** removed from the Starter Prompts page in November 2026 (Brittany's review); the page is now the prompt builder only. `prompts-data.js` and `prompts.js` are kept in the repo, not loaded, in case it comes back.
+- **AI guardrail:** prompts are for words. Public-facing visuals (ads, social graphics, PDFs, event graphics) go to the creative team to design, or to review and refine anything AI made; the builder adds that line to public-facing prompt types. Tidying up presentations and internal documents in the approved templates is fine.
+- **Brand updates (test):** the builder adds only the entries in `brand-updates.js` dated after the day the person's AI agent last learned the brand (default: `kitDate`, the Claude brand kit release). When a brand rule changes, add an entry there, and raise `kitDate` when a new brand kit goes out.
+- **Word letterhead:** `site/assets/downloads/SmartCommunications_Letterhead_Template_2026.docx`, Smart's 2026 letterhead from Brittany (November 2026), published as she sent it.
 - **Large files:** GitHub refuses files over 100 MB, and warns above 50 MB. The master deck is about 30 MB. Link to SharePoint for anything bigger.
 - **Proxima Nova (Adobe Fonts):** loads from Smart's own Adobe Fonts web project, `https://use.typekit.net/wde7hle.css` (Regular and Bold, with italics), linked in the `<head>` of both HTML pages. The web project only serves the font to the website addresses listed in it, so when the site moves to brand.smartcommunications.com, add that address to the web project in Adobe Fonts.
 
@@ -99,7 +102,9 @@ Leave the BugHerd script alone until Studio Rendezvous confirms review is finish
 
 - **20 "Link coming" buttons:** the `null` entries in `window.SC_LINKS` (image library and cut-out library, which are hidden for now, the Innovate 2027 PowerPoint template, the PowerPoint toolkit, event backdrops and retractable banners, giveaway templates, the SmartIQ Story video).
 - **Finished photo backgrounds** for the image packs: still to come. The two image pack cards and the Text Overlay example were removed from Images in November 2026 (the raw stock and overlay example were misleading); bring the packs back once finished backgrounds exist. The Innovate city photos were replaced in November 2026 with finished versions (Innovate27 bar, logo and color treatment); each city downloads as a zip of 2000 × 1334 px PNGs from `site/assets/downloads/`.
-- **Prompt builder:** "Social post or display ad" writes text-only copy for now. Once the messaging framework is final, Brittany wants the prompts to tell Claude to read the brand guide and the messaging framework.
+- **Prompt builder:** "Social post or display ad" writes text-only copy (LinkedIn post, LinkedIn ad, display ad, ad carousel). Once the messaging framework is final, Brittany wants the prompts to tell Claude to read the brand guide and the messaging framework.
+- **Brand updates log:** a test; Brittany to try it before it's announced.
+- **2027 PowerPoint template:** add it to Templates (and the Innovate card) once Brittany sends the link.
 - **Open BugHerd comments:** #111 SmartIQ Story link, #154 Innovate 2027 template, #159 PowerPoint toolkit, #58 footer contacts and Asana link, #59 case study / PathFactory / YouTube thumbnail guide, #49 industry icons (parked).
 - **WordPress:** Smart's developers asked for a WordPress wrapper so the guide can run at brand.smartcommunications.com on Kinsta. The likely approach is a small WordPress theme that serves `site/` unchanged at `/` and `/prompts/`, with asset paths pointing into the theme. Not built yet; waiting on the developers' answers (own look or inside the corporate header and footer, separate WordPress install or part of the main site, how they deploy to Kinsta).
 

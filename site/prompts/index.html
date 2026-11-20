@@ -13,9 +13,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://use.typekit.net/wde7hle.css">
-  <link rel="stylesheet" href="../css/tokens.css?v=20261117b">
-  <link rel="stylesheet" href="../css/site.css?v=20261117b">
-  <link rel="stylesheet" href="prompts.css?v=20261117b">
+  <link rel="stylesheet" href="../css/tokens.css?v=20261120a">
+  <link rel="stylesheet" href="../css/site.css?v=20261120a">
+  <link rel="stylesheet" href="prompts.css?v=20261120a">
 <script>
   /* BugHerd feedback sidebar, same switch as the guide: ?review=1 turns it on for the tab, ?review=0 turns it off. */
   (function () {
@@ -57,28 +57,13 @@
       <button type="button" data-ai="other">Microsoft Copilot</button>
     </div>
   </div>
-</div>
-
-<div class="pl-bar">
-  <div class="pl-bar__inner">
-    <a class="btn btn--sm btn--ghost pl-back" href="../"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Brand guide</a>
-    <div class="pl-tabs" role="tablist" aria-label="Prompt tools">
-      <a role="tab" href="#build" id="tab-build" aria-controls="builder">Build a prompt</a>
-      <a role="tab" href="#library" id="tab-library" aria-controls="main">Prompt library</a>
-    </div>
-    <div class="pl-libtools">
-      <div class="search">
-        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        <label class="visually-hidden" for="pl-q">Search prompts</label>
-        <input id="pl-q" type="search" placeholder="Search: battlecard, webinar, LinkedIn…" autocomplete="off">
-      </div>
-      <div class="seg" id="pl-types" role="group" aria-label="Prompt type"></div>
-      <span class="icon-count" id="pl-count" aria-live="polite"></span>
-    </div>
+  <div class="card card--soft pl-guard">
+    <h2>AI writes the words; the creative team makes the visuals</h2>
+    <p>Need a public-facing visual? Use the Creative brief prompt.</p>
   </div>
 </div>
 
-<section class="pl-builder wrap" id="builder" role="tabpanel" aria-labelledby="tab-build">
+<section class="pl-builder wrap" id="builder" aria-label="Prompt builder">
   <h2 class="pl-step">1. What are you making?</h2>
   <div class="b-types" id="b-types" role="group" aria-label="What you're making"></div>
   <div class="b-grid">
@@ -91,15 +76,19 @@
       <h2 class="pl-step">3. Copy your prompt</h2>
       <div class="pl-box is-open"><pre id="b-preview" aria-live="polite"></pre></div>
       <p class="pl-sub" id="b-left"></p>
+      <div class="b-upd card card--soft">
+        <div class="b-upd__row">
+          <label class="b-upd__check"><input type="checkbox" id="b-upd"> Add brand updates since my AI agent was last updated on</label>
+          <label class="visually-hidden" for="b-upd-since">Date your AI agent was last updated</label><input type="date" id="b-upd-since">
+        </div>
+        <p class="pl-sub" id="b-upd-note"></p>
+        <details class="b-upd__all"><summary>See all brand updates</summary><ul id="b-upd-list"></ul></details>
+      </div>
       <div class="row pl-actions"><button class="btn" type="button" id="b-copy">Copy prompt</button><button class="btn btn--ghost" type="button" id="b-reset">Clear the form</button></div>
     </div>
   </div>
 </section>
 
-<main id="main" class="pl-main wrap" role="tabpanel" aria-labelledby="tab-library">
-  <nav class="pl-rail" id="pl-rail" aria-label="Prompt categories"></nav>
-  <div class="pl-list" id="pl-list"></div>
-</main>
 
 <footer class="footer">
   <div class="wrap">
@@ -110,10 +99,9 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="prompts-data.js?v=20261117b"></script>
-<script src="assistant.js?v=20261117b"></script>
-<script src="prompts.js?v=20261117b"></script>
-<script src="builder.js?v=20261117b"></script>
-<script src="page.js?v=20261117b"></script>
+<script src="brand-updates.js?v=20261120a"></script>
+<script src="assistant.js?v=20261120a"></script>
+<script src="builder.js?v=20261120a"></script>
+<script src="page.js?v=20261120a"></script>
 </body>
 </html>

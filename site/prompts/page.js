@@ -1,26 +1,10 @@
-/* Tabs (#build / #library) and the AI assistant switch. */
+/* The AI assistant switch. (The prompt library tab was removed in November 2026; prompts-data.js and prompts.js are kept for reference.) */
 (function () {
   "use strict";
   const AI = window.SC_ASSISTANT;
   const $ = (s) => document.querySelector(s);
-  const LIBRARY = /^(library|quick-start|chains|rules|s-\d|p-\d)/;   // anchors that live in the library
-
-  function show() {
-    const lib = LIBRARY.test(location.hash.slice(1));
-    document.body.classList.toggle("is-library", lib);
-    $("#builder").hidden = lib;
-    $("#main").hidden = !lib;
-    $("#tab-build").setAttribute("aria-selected", String(!lib));
-    $("#tab-library").setAttribute("aria-selected", String(lib));
-    // the library script scrolls to its anchor before this shows the panel, so scroll again once it's visible
-    const el = lib && document.getElementById(location.hash.slice(1));
-    if (el) requestAnimationFrame(() => el.scrollIntoView({ block: "start" }));
-  }
-  window.addEventListener("hashchange", show);
-  show();
-
   const NOTES = {
-    claude: "Prompts start with a line that loads the Smart Communications brand skills, so Claude can build decks, PDFs and social tiles on brand.",
+    claude: "Prompts start with a line that loads the Smart Communications brand skills, so Claude writes on brand and can tidy up decks and internal documents in the approved templates.",
     other: "Prompts start with a short brand brief instead (voice, product names, colors and fonts), so Copilot writes on brand. They work the same way in ChatGPT or Gemini.",
   };
   function sync() {

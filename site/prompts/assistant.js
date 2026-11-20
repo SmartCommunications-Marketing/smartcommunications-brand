@@ -14,7 +14,7 @@
     "- Exact product names, ™ on first mention, never abbreviated: Smart Communications™, SmartCOMM™, SmartIQ™, SmartPATH™, SmartHUB™, SmartDX™.",
     "- Don't use \"Conversation Cloud\": it is retired. Say the Smart Communications platform, or name the product.",
     "- No invented statistics, customer names, quotes or logos. Mark missing proof as [NEEDS PROOF].",
-    "- If you design anything: Industry Blue Darker #03102C and Dodger Blue #0094FF, Roboto for web, Segoe UI for PowerPoint and Word.",
+    "- Write the words; don't create images or graphics for anything public-facing: the creative team designs those. Presentations and internal documents use the approved templates (Segoe UI, Industry Blue Darker #03102C, Dodger Blue #0094FF).",
   ].join("\n");
 
   // Claude-skill steps in the library prompts, and what they become for other assistants

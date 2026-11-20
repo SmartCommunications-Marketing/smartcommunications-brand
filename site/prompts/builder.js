@@ -27,24 +27,47 @@
     proof: ["proof", "Approved proof points", "area", "Stats, quotes or results you're cleared to use. Only these will be used."],
   };
 
+  // guardrail: AI writes the words; public-facing visuals go to the creative team
+  const CREATIVE = "Write the words only. The creative team makes the visuals.";
+
   const TYPES = [
-    // text-only for now (#168, #176): no image tiles until the finished backgrounds arrive
+    // text-only: the creative team designs the visuals (#168, #176, Nov 2026 review)
     { id: "social", name: "Social post or display ad", skills: ["copy"], fields: [
-      ["channel", "Channel", "select", ["LinkedIn post", "Facebook, Instagram or X post", "LinkedIn ad", "Display ad (e.g. 6Sense, Google)"]],
+      ["channel", "Channel", "select", ["LinkedIn post", "LinkedIn ad", "Display ad (e.g. 6Sense, Google)", "Ad carousel"]],
       ["postType", "Purpose", "select", ["Announcement or news", "Event or webinar promotion", "Report or content launch", "Thought leadership", "Customer story", "Hiring", "Award or recognition"]],
       F.topic, F.audience, F.product, F.goal, ["url", "Link", "text", "https://"], F.proof],
       build: (v) => [
         `Write social or ad copy about ${v.topic}. Channel: ${v.channel}. Purpose: ${v.postType}.`,
         `Audience: ${v.audience}. Product: ${v.product}.`,
-        "Text only: no image or graphic.",
-        /display ad/i.test(v.channel)
+        /carousel/i.test(v.channel)
+          ? `Give me 2 versions, each with intro text (150 characters or fewer), 3–5 cards with a headline each (45 characters or fewer) that tell one story in order, and a button label. Call to action: ${v.goal}. Link: ${v.url}.`
+          : /display ad/i.test(v.channel)
           ? `Give me 3 variations, each with a headline (30 characters or fewer), a description (90 characters or fewer) and a button label. Call to action: ${v.goal}. Link: ${v.url}.`
           : /linkedin ad/i.test(v.channel)
             ? `Give me 3 variations, each with intro text (150 characters or fewer), a headline (70 characters or fewer) and a button label. Call to action: ${v.goal}. Link: ${v.url}.`
             : `Give me 2 versions of the post, each with a hook line, 1–3 short sentences, one call to action (${v.goal}), the link (${v.url}) and 0–3 hashtags.`,
         v.proof !== "[PROOF POINTS]" ? `Use only these proof points: ${v.proof}` : "",
+        CREATIVE,
       ] },
-    { id: "brief", name: "Solution brief", skills: ["brand", "digital-pdf", "copy"], fields: [
+    { id: "creative", name: "Creative brief", skills: ["copy"], fields: [
+      ["deliverable", "What the creative team will make", "select", ["Social graphics", "Display or LinkedIn ads", "Ad carousel", "eBook, report or PDF", "Landing page or web graphics", "Event graphics or signage", "Video", "Presentation design", "Something else"]],
+      F.topic, F.audience, F.product, F.goal,
+      ["formats", "Sizes, formats and channels", "text", "e.g. LinkedIn 1200 × 627, 6Sense 300 × 250"],
+      ["deadline", "Due date", "text", "e.g. 12 December"],
+      ["mandatories", "Must include", "area", "Approved copy, logos, legal lines, partner marks"],
+      ["references", "References or examples", "area", "Links to past work, mood or competitors"], F.proof],
+      build: (v) => [
+        `Write a creative brief for the Smart Communications creative team. Deliverable: ${v.deliverable}.`,
+        "Don't design anything or create images: the creative team designs it. Write the brief only.",
+        `Topic: ${v.topic}. Audience: ${v.audience}. Product: ${v.product}. Goal or call to action: ${v.goal}.`,
+        `Sizes, formats and channels: ${v.formats}. Due: ${v.deadline}.`,
+        `Must include: ${v.mandatories}`,
+        `References: ${v.references}`,
+        v.proof !== "[PROOF POINTS]" ? `Approved proof points: ${v.proof}` : "",
+        "Sections: background, objective, audience, the single most important message, supporting points, deliverables with sizes and formats, must-includes, tone (the brand voice), references, timeline and approvals.",
+        "Keep it to one page. Mark anything I still need to confirm as [TO CONFIRM].",
+      ] },
+    { id: "brief", name: "Solution brief", skills: ["copy"], fields: [
       ["useCase", "Use case", "text", "e.g. claims correspondence, policy onboarding"],
       F.industry, F.product, F.audience, ["length", "Length", "select", ["2-page brief", "4–6 page eBook (US Letter)"]], F.source, F.proof],
       build: (v, c) => [
@@ -53,9 +76,10 @@
         `Structure: the challenge, what changes with ${v.product} (outcomes first), how it works, proof, and a closing call to action.`,
         `Source content: ${v.source}`,
         v.proof !== "[PROOF POINTS]" ? `Proof points I'm cleared to use: ${v.proof}` : "Mark every proof point I still need as [NEEDS PROOF].",
-        c ? "Give me the page outline (recipe + title + content beats) and per-page spec first; build the PDF once I approve." : "Give me the page outline (title + content beats) first; write the page content once I approve.",
+        "Give me the page outline (title + content beats) first; write the page content once I approve.",
+        CREATIVE,
       ] },
-    { id: "case", name: "Case study", skills: ["copy", "digital-pdf"], fields: [
+    { id: "case", name: "Case study", skills: ["copy"], fields: [
       ["customer", "Customer", "text", "Name, or leave blank to anonymize"],
       ["approved", "Approved for public use?", "select", ["Yes, the customer has approved it", "No, anonymize it (e.g. “a top-10 US insurer”)"]],
       F.industry, F.product,
@@ -69,8 +93,9 @@
         `Notes: ${v.notes}`,
         v.proof !== "[PROOF POINTS]" ? `Results I'm cleared to use: ${v.proof}` : "",
         "Flag anything that looks like it needs customer sign-off.",
+        CREATIVE,
       ] },
-    { id: "datasheet", name: "Data sheet", skills: ["brand", "digital-pdf", "copy"], fields: [
+    { id: "datasheet", name: "Data sheet", skills: ["copy"], fields: [
       F.product, ["capabilities", "Key capabilities", "area", "One per line"], ["integrations", "Integrations, specs or deployment", "area", "e.g. cloud, APIs, Salesforce, Guidewire"],
       F.audience, ["length", "Length", "select", ["1 page (US Letter)", "2 pages (US Letter)"]], F.source, F.proof],
       build: (v, c) => [
@@ -81,9 +106,10 @@
         `Integrations, specs or deployment: ${v.integrations}`,
         `Source content: ${v.source}`,
         v.proof !== "[PROOF POINTS]" ? `Proof points I'm cleared to use: ${v.proof}` : "Mark every proof point I still need as [NEEDS PROOF].",
-        c ? "Show me the outline and per-page spec first; build the PDF once I approve." : "Show me the outline first; write the content once I approve.",
+        "Show me the outline first; write the content once I approve.",
+        CREATIVE,
       ] },
-    { id: "whitepaper", name: "White paper or eBook", skills: ["digital-pdf", "copy"], fields: [
+    { id: "whitepaper", name: "White paper or eBook", skills: ["copy"], fields: [
       F.topic, F.industry, F.audience, F.region,
       ["length", "Format", "select", ["eBook, 4–8 pages (US Letter)", "Report, 12–20 pages (US Letter)", "LinkedIn PDF carousel, 6–8 pages (15 × 8 in)"]],
       ["research", "Research the topic first?", "select", ["Yes, research it and show me sources first", "No, use only my source material"]], F.source],
@@ -92,8 +118,9 @@
         /^yes/i.test(v.research)
           ? "Step 1: research the topic from public sources and show me the key findings, each with a link and a date. Separate facts from interpretation."
           : `Use only this source material: ${v.source}`,
-        `Step ${/^yes/i.test(v.research) ? 2 : 1}: once I approve, outline it page by page${c ? " with recipe names" : ""}, then ${c ? "build it" : "write it"}.`,
+        `Step ${/^yes/i.test(v.research) ? 2 : 1}: once I approve, outline it page by page, then write it.`,
         "Only use statistics that appear in the sources, and cite each one.",
+        CREATIVE,
       ] },
     { id: "deck", name: "Presentation", skills: ["brand", "ppt"], fields: [
       ["meeting", "Meeting", "select", ["Discovery call", "Demo follow-up", "Executive briefing", "Quarterly business review", "Internal release briefing", "Webinar or event talk"]],
@@ -106,8 +133,9 @@
         `Their priorities: ${v.priorities}`,
         v.proof !== "[PROOF POINTS]" ? `Proof points I'm cleared to use: ${v.proof}` : "Use [NEEDS PROOF] wherever proof is missing.",
         "One idea per slide, body text at least 14 pt, no invented customer logos or statistics.",
-        c ? "Show me the outline table (# · recipe · title · purpose) first, then build the .pptx with the slide builder."
+        c ? "Show me the outline table (# · recipe · title · purpose) first, then build the .pptx in the 2026 master template with the slide builder."
           : "Show me the outline (# · title · purpose) first, then write the slide content. I'll build it in the 2026 master template.",
+        "Use only the template's layouts, icons and approved photos; don't generate new images. If this deck goes to customers or an event audience, list any new graphics so the creative team can review them.",
       ] },
     { id: "email", name: "Email", skills: ["copy"], fields: [
       ["emailType", "Email type", "select", ["Single email", "3-email nurture sequence", "5-email nurture sequence", "Event invitation sequence", "Follow-up after a meeting", "Internal announcement"]],
@@ -140,13 +168,15 @@
         `Write landing page copy for ${art(v.offer)} about ${v.topic}, for ${v.audience}. Product: ${v.product}.`,
         `Sections: hero (headline of 10 words or fewer, a lede of 35 words or fewer, one call to action: ${v.goal}), 3 benefit blocks (outcome headline + 1–2 sentences), a proof section, a 4-question FAQ and a closing call to action.`,
         v.proof !== "[PROOF POINTS]" ? `Use only this proof: ${v.proof}` : "Mark the proof section [NEEDS PROOF].",
+        CREATIVE,
       ] },
-    { id: "webinar", name: "Webinar or event promotion", skills: ["copy", "social"], fields: [
+    { id: "webinar", name: "Webinar or event promotion", skills: ["copy"], fields: [
       F.topic, ["date", "Date and time", "text", "e.g. 4 December, 11 am ET"], ["speakers", "Speakers and titles", "text", ""], F.audience, ["url", "Registration link", "text", "https://"]],
       build: (v) => [
         `We're running a webinar on ${v.topic} on ${v.date} with ${v.speakers}, for ${v.audience}.`,
         "Create: 3 title options (10 words or fewer), a 100-word abstract, 3 learning outcomes, registration page copy, 3 promo emails (announce, reminder, last chance), 2 LinkedIn posts with captions, and a follow-up email with a [RECORDING LINK] placeholder.",
         `Registration link: ${v.url}.`,
+        CREATIVE,
       ] },
     { id: "press", name: "Press release", skills: ["copy"], fields: [
       ["newsType", "News", "select", ["Product release", "Partnership", "Customer win", "Award or analyst recognition", "Company news"]],
@@ -189,7 +219,38 @@
     const head = c ? AI.skillsLine(["smart-communications-brand"].concat(t.skills.filter((s) => s !== "brand").map((s) => "smart-communications-" + s)))
       : AI.brand;
     const who = `I'm in ${(state.values.role || "").trim() || "[ROLE]"} at Smart Communications.`;
-    return [head, who].concat(t.build(v, c).filter(Boolean)).join("\n");
+    return [head].concat(updateLines(), [who], t.build(v, c).filter(Boolean)).join("\n");
+  }
+
+  /* Brand updates (test): add only what changed after the reader's agent last learned the brand. */
+  const UPD = window.SC_BRAND_UPDATES || { kitDate: "", updates: [] };
+  const UKEY = "sc-agent-updated";
+  const upd = { on: true, since: UPD.kitDate };
+  try {
+    const saved = JSON.parse(localStorage.getItem(UKEY) || "null");
+    if (saved) { upd.on = saved.on !== false; upd.since = saved.since || UPD.kitDate; }
+  } catch (e) {}
+  const longDate = (d) => new Date(d + "T12:00:00").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  const newer = () => UPD.updates.filter((u) => !upd.since || u.date > upd.since);
+  function updateLines() {
+    const list = upd.on ? newer() : [];
+    if (!list.length) return [];
+    return [`Brand updates since ${upd.since ? longDate(upd.since) : "the brand kit"} (these replace anything older you know):`]
+      .concat(list.map((u) => `- ${u.text}`));
+  }
+  function renderUpdates() {
+    const n = newer().length;
+    $("#b-upd").checked = upd.on;
+    $("#b-upd-since").value = upd.since;
+    $("#b-upd-note").textContent = n
+      ? `${n} update${n === 1 ? "" : "s"} since then${upd.on ? " will be added to the prompt." : ". Tick the box to add them."}`
+      : "No brand updates since then. Your agent is up to date.";
+    $("#b-upd-list").innerHTML = UPD.updates.map((u) =>
+      `<li${upd.since && u.date <= upd.since ? ' class="is-old"' : ""}><time datetime="${u.date}">${esc(longDate(u.date))}</time> ${esc(u.text)}</li>`).join("");
+  }
+  function saveUpdates() {
+    try { localStorage.setItem(UKEY, JSON.stringify(upd)); } catch (e) {}
+    renderUpdates(); renderPreview();
   }
 
   function fieldHTML(f) {
@@ -245,6 +306,10 @@
       renderForm();
     }
   });
+  document.addEventListener("change", (e) => {
+    if (e.target.id === "b-upd") { upd.on = e.target.checked; saveUpdates(); }
+    if (e.target.id === "b-upd-since") { upd.since = e.target.value; saveUpdates(); }
+  });
   document.addEventListener("input", (e) => {
     const f = e.target.closest("[data-f]");
     if (!f || !f.closest("#builder")) return;
@@ -254,5 +319,6 @@
   AI.onChange(renderPreview);
 
   renderTypes();
+  renderUpdates();
   renderForm();
 })();

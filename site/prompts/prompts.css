@@ -161,3 +161,18 @@ html { scroll-padding-top: 90px; }
 }
 
 .pl-main[hidden], .pl-builder[hidden] { display: none; }
+
+/* Guardrail note and brand updates (November 2026) */
+.pl-guard { margin-top: 16px; }
+.pl-guard h2 { font: 700 17px/24px var(--font-head); }
+.b-upd { margin: 14px 0 0; padding: 16px 18px; }
+.b-upd__row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.b-upd__check { display: flex; align-items: center; gap: 8px; color: var(--text-strong); font: 500 14px/20px var(--font-ui); }
+.b-upd__check input { width: 18px; height: 18px; accent-color: var(--sc-dodger); }
+.b-upd input[type="date"] { padding: 6px 10px; border: 1px solid var(--line-card); border-radius: 8px; font: 14px/20px var(--font-ui); color: var(--text-strong); }
+.b-upd .pl-sub { margin-top: 8px; }
+.b-upd__all { margin-top: 8px; font-size: 14px; line-height: 20px; }
+.b-upd__all summary { cursor: pointer; color: var(--sc-ui-blue); font-weight: 500; }
+.b-upd__all ul { margin: 10px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.b-upd__all li time { display: block; color: var(--text-strong); font-weight: 600; }
+.b-upd__all li.is-old { opacity: 0.6; }
