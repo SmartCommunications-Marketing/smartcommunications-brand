@@ -62,7 +62,7 @@ Section anchors in `index.html`: `#logo`, `#product-logos`, `#color`, `#typograp
 - **Brand updates (test):** the builder adds only the entries in `brand-updates.js` dated after the day the person's AI agent last learned the brand (default: `kitDate`, the Claude brand kit release). When a brand rule changes, add an entry there, and raise `kitDate` when a new brand kit goes out.
 - **Word letterhead:** `site/assets/downloads/SmartCommunications_Letterhead_Template_2026.docx`, Smart's 2026 letterhead from Brittany (November 2026), published as she sent it.
 - **Large files:** GitHub refuses files over 100 MB, and warns above 50 MB. The master deck is about 30 MB. Link to SharePoint for anything bigger.
-- **Proxima Nova (Adobe Fonts):** loads from Smart's own Adobe Fonts web project, `https://use.typekit.net/wde7hle.css` (Regular and Bold, with italics), linked in the `<head>` of both HTML pages. The web project only serves the font to the website addresses listed in it, so when the site moves to brand.smartcommunications.com, add that address to the web project in Adobe Fonts.
+- **Proxima Nova (Adobe Fonts):** loads from Smart's own Adobe Fonts web project, `https://use.typekit.net/wde7hle.css` (Regular and Bold, with italics), linked in the `<head>` of both HTML pages. Adobe gives the web project a single link that works on any address, so moving the site to brand.smartcommunications.com needs no change in Adobe Fonts. If the web project is ever replaced, swap the new link into both pages.
 
 ## Brand rules for anything written on the site
 
