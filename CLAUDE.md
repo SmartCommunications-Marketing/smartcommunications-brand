@@ -7,9 +7,9 @@ This file tells Claude how the Smart Communications brand guide website works an
 A one-page brand guide for Smart Communications (logo, color, type, icons, images, voice, events, sub-brands, templates, guides) plus a Starter Prompts page. It is plain HTML, CSS and JavaScript: no build step, no framework, no dependencies, no database. Everything that goes live is in `site/`. Designed and built by Studio Rendezvous in 2026; owned and edited by Smart Communications marketing (Alistair) from November 2026.
 
 - **Repository:** https://github.com/SmartCommunications-Marketing/smartcommunications-brand (public)
-- **Live site:** https://smartcommunications-marketing.github.io/smartcommunications-brand/
-- **Starter Prompts page:** the same address plus `prompts/`
-- **Final home (planned):** brand.smartcommunications.com, hosted on Smart's WordPress / Kinsta setup. Not set up yet; see "Still open" below.
+- **Live site:** https://brand.smartcommunications.com/, hosted on GitHub Pages (see "Hosting and domain" below)
+- **Starter Prompts page:** https://brand.smartcommunications.com/prompts/
+- **Old address:** https://smartcommunications-marketing.github.io/smartcommunications-brand/ forwards to the live site, so old links keep working.
 
 ## How a change goes live
 
@@ -21,6 +21,16 @@ A one-page brand guide for Smart Communications (logo, color, type, icons, image
 6. Commit with a plain-English message, then push to `main`. The workflow `.github/workflows/pages.yml` publishes `site/` to the live site in about a minute. Watch it with `gh run watch` or in the repository's Actions tab.
 
 **Pushing to `main` publishes to the live site.** Always show the person the change in the local preview and get a clear yes before pushing.
+
+## Hosting and domain
+
+Since November 2026 the guide runs on GitHub Pages at brand.smartcommunications.com, in place of the earlier plan to wrap it in WordPress on Kinsta.
+
+- **Custom domain:** set in the repository's Settings → Pages → Custom domain, as `brand.smartcommunications.com`. It must say exactly that. Set to `smartcommunications.com` once by mistake, it sent every visitor to the main Smart website. There is no `CNAME` file in `site/`; with a workflow-published site, GitHub uses the setting, not a file.
+- **DNS (managed by Smart's IT, in Cloudflare):** a CNAME record `brand` → `smartcommunications-marketing.github.io`, DNS only (no Cloudflare proxy), and a TXT record `_github-pages-challenge-SmartCommunications-Marketing.brand` that verifies the domain for the GitHub organization. Both must stay in place. Nothing else on smartcommunications.com points at GitHub.
+- **HTTPS:** enforced. GitHub issues and renews the certificate itself.
+- **If the site stops loading after a domain or settings change,** start a fresh publish: `gh workflow run pages.yml --ref main`. Don't re-run an old run from the Actions tab: its packaged files expire after a day and the re-run fails.
+- **Search engines:** the `noindex` tag only covers the two HTML pages. GitHub Pages can't add a "don't index" header to the downloads (PDFs, decks, zips), so a download linked from somewhere public could still show up in search.
 
 ## The one rule: version tags
 
@@ -94,9 +104,10 @@ The BugHerd review that Studio Rendezvous runs is still open for the last few co
 Leave the BugHerd script alone until Studio Rendezvous confirms review is finished. Then, for launch:
 
 1. Remove the BugHerd `<script>` block from `site/index.html` and `site/prompts/index.html`.
-2. Point `og:url` and `og:image` in `site/index.html` at the final address (brand.smartcommunications.com).
-3. Keep the `noindex` tags.
-4. Raise the version tags.
+2. Keep the `noindex` tags.
+3. Raise the version tags.
+
+`og:url` and `og:image` in `site/index.html` already point at brand.smartcommunications.com (done November 2026).
 
 ## Still open (November 2026)
 
@@ -106,8 +117,6 @@ Leave the BugHerd script alone until Studio Rendezvous confirms review is finish
 - **Brand updates log:** a test; Brittany to try it before it's announced.
 - **2027 PowerPoint template:** add it to Templates (and the Innovate card) once Brittany sends the link.
 - **Open BugHerd comments:** #111 SmartIQ Story link, #154 Innovate 2027 template, #159 PowerPoint toolkit, #58 footer contacts and Asana link, #59 case study / PathFactory / YouTube thumbnail guide, #49 industry icons (parked).
-- **WordPress:** Smart's developers asked for a WordPress wrapper so the guide can run at brand.smartcommunications.com on Kinsta. The likely approach is a small WordPress theme that serves `site/` unchanged at `/` and `/prompts/`, with asset paths pointing into the theme. Not built yet; waiting on the developers' answers (own look or inside the corporate header and footer, separate WordPress install or part of the main site, how they deploy to Kinsta).
-
 ## Contacts
 
 - Smart Communications: Alistair (brand, owner of the repository), Brittany (prompts, brand), Brandyn (video and The Brief links).
